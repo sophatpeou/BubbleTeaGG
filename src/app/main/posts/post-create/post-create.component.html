@@ -1,25 +1,25 @@
 <div class="row">
   <div class="col-xs-10">
     <form (submit)="onAddPost(postForm)" #postForm="ngForm">
-    <input type="text"
-      class="form-control"
-      name="title"
-      ngModel
-      required
-      minlength="3"
-      placeholder="Post Title"
-      #title="ngModel">
+      <input type="text"
+        class="form-control"
+        name="title"
+        [ngModel]="post?.title"
+        required
+        minlength="3"
+        placeholder="Post Title"
+        #title="ngModel">
 
-    <textarea
-      class="form-control"
-      name="content"
-      rows="4"
-      ngModel
-      required
-      placeholder="Post Content"
-      #content="ngModel"></textarea>
-    <button class="btn btn-primary" type="submit">Submit</button>
+      <textarea class="form-control"
+        name="content"
+        rows="4"
+        [ngModel]="post?.content"
+        required
+        placeholder="Post Content"
+        #content="ngModel">
+      </textarea>
+      <button class="btn btn-primary" type="submit">Submit</button>
     </form>
   </div>
 </div>
-
+<!-- ? force angular to check if post exists -->

@@ -37,11 +37,13 @@ export class PostsService {
   }
 
   getPost(id: string) {
-    return{...this.posts.find(p => p.id === id)};
+    // return{...this.posts.find(p => p.id === id)};
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<{_id: string, title: string, content: string}>('http://localhost:3000/api/posts/' + id); //GET IS A GENERIC METHOD <>
   }
 
   addPost(title: string, content: string) {
-    const post: Post = { id: null, title: title, content: content }; // create a post
+    const post: Post = { id: null, title, content }; // create a post
     this.http
       .post<{ message: string, postId: string }>('http://localhost:3000/api/posts', post)
       .subscribe(responseData => {
@@ -50,6 +52,14 @@ export class PostsService {
         post.id = id;
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
+      });
+  }
+
+  updatePost(id: string, title: string, content: string) {
+    const post: Post = { id, title, content};
+    this.http.put('http://localhost:3000/api/posts/' + id, post)
+      .subscribe((response) => {
+        const updatedPosts = [...this.posts];
       });
   }
 

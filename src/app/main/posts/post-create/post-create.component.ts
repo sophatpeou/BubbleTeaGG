@@ -14,18 +14,23 @@ export class PostCreateComponent {
   enteredContent = '';
   private mode = 'create';
   private postId: string;
-  private post: Post;
+  post: Post;
 
-  constructor(public postsService: PostsService, public route: ActivatedRoute) { }
+  constructor(
+    public postsService: PostsService,
+    public route: ActivatedRoute
+  ) {}
 
   // tslint:disable-next-line:use-lifecycle-interface
-  ngOnInit(){
+  ngOnInit() {
     this.route.paramMap.subscribe(( paramMap: ParamMap ) => {
       if (paramMap.has('postId')) {
         this.mode = 'edit';
         this.postId = paramMap.get('postId');
-        this.post = this.postsService.getPost(this.postId);
-
+        // this.post = this.postsService.getPost(this.postId); // changed to below line
+        this.postsService.getPost(this.postId).subscribe(postData => {
+          this.post = {id: postData._id, title: postData.title, content: postData.content};
+        });
       } else {
         this.mode = 'create';
         this.postId = null;
@@ -36,8 +41,12 @@ export class PostCreateComponent {
   onAddPost(form: NgForm) {
     if (form.invalid) {
       return;
+      // tslint:disable-next-line:align
+    } if (this.mode === 'create') {
+      this.postsService.addPost(form.value.title, form.value.content);
+    } else {
+      this.postsService.updatePost(this.postId, form.value.title, form.value.content);
     }
-    this.postsService.addPost(form.value.title, form.value.content);
     form.resetForm();
   }
 }

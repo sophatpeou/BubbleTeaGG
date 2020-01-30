@@ -7,7 +7,8 @@ import { ProfileComponent } from './main/profile/profile.component';
 import { ScoresComponent } from './main/scores/scores.component';
 import { NewsComponent } from './main/news/news.component';
 import { StatisticsComponent } from './main/statistics/statistics.component';
-import {EditComponent} from './main/posts/edit/edit.component';
+// import {EditComponent} from './main/posts/edit/edit.component';
+import {PostCreateComponent} from './main/posts/post-create/post-create.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'edit/:postId',
-    component: EditComponent
+    component: PostCreateComponent
   },
   {
     path: 'roster',
