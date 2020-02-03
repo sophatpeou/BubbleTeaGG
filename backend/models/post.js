@@ -6,3 +6,5 @@ const postSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model('Post', postSchema );
+
+// this is the schema which shows what type of variables that should be in the data sent or taken.

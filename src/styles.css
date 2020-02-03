@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+.navbar {
+  border-bottom: #008ed6 3px solid;
+
+}

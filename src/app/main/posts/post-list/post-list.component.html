@@ -1,16 +1,20 @@
-<div class="container">
-  <div class="col-xs-8">
-    <div class="panel panel-default" *ngFor="let post of posts">
-      <div class="panel-heading">{{post.title}}</div>
-      <div class="panel-body">
-        <p>{{post.content}}</p>
-      </div>
-      <div class="panel-footer">
-        <a class="btn btn-default" [routerLink]="['/edit', post.id]">Edit</a>
+<div class="container col-md-8" >
+<div class="spinner-border text-primary" role="status" >
+  <span class="sr-only">Loading...</span>
+</div>
+
+  <div class="card" *ngFor="let post of posts">
+    <div class="card-header">{{post.title}}</div>
+    <div class="card-body"><p>{{post.content}}</p></div>
+    <div class="card-footer">
+      <div class="btn-toolbar">
+        <a class="btn btn-warning" [routerLink]="['/edit', post.id]">Edit</a>
         <a class="btn btn-danger" (click)="onDelete(post.id)">Delete</a>
       </div>
     </div>
   </div>
+
+<div class="p-3 mb-2 bg-light text-dark" *ngIf="posts.length <= 0">No Comment</div>
 </div>
 
 <!--<mat-accordion multi="true" *ngIf="posts.length > 0">-->
