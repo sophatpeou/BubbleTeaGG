@@ -1,27 +1,20 @@
-
-
 <div class="container">
   <div class="col-md-8">
-    <form (submit)="onAddPost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
-      <input type="text"
+    <form [formGroup]="form" (submit)="onAddPost()" *ngIf="!isLoading">
+      <input
         class="form-control"
-        name="title"
-        [ngModel]="post?.title"
-        required
-        minlength="3"
+        type="text"
+        formControlName="title"
         placeholder="Post Title"
-        #title="ngModel">
-
+      >
+<!-- ReactiveFormModule does validation differently -->
       <button class="btn btn-outline-secondary btn-sm" type="button" (click)="filePicker.click()">Pick Image</button>
-      <input type="file" #filePicker>
-
+      <input type="file" #filePicker (change)="onImagePicked($event)">
       <textarea class="form-control"
-        name="content"
+        formControlName="content"
         rows="4"
-        [ngModel]="post?.content"
-        required
         placeholder="Post Content"
-        #content="ngModel">
+      >
       </textarea>
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>
